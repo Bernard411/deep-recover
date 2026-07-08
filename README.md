@@ -16,7 +16,7 @@ Only run this against media you **own** or have **explicit written authorization
 ## Installation
 
 ```bash
-git clone https://github.com/bernard411/deep-recover.git
+git clone https://github.com/Bernard411/deep-recover.git
 cd deep-recover
 pip install -r requirements.txt --break-system-packages   # Kali/Debian externally-managed envs
 pip install -e .
