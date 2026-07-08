@@ -15,21 +15,36 @@ Only run this against media you **own** or have **explicit written authorization
 
 ## Installation
 
+[![PyPI](https://img.shields.io/pypi/v/deep-recover)](https://pypi.org/project/deep-recover/)
+
+**From PyPI (recommended):**
+
 ```bash
-git clone https://github.com/Bernard411/deep-recover.git
-cd deep-recover
-pip install -r requirements.txt --break-system-packages   # Kali/Debian externally-managed envs
-pip install -e .
+pip install deep-recover
 ```
 
-`pytsk3` (used for metadata recovery) needs build tools on some systems:
+This installs the CLI with the signature-carving engine ready to go. To also get the filesystem-metadata engine (recommended — more accurate, recovers real filenames):
+
+```bash
+pip install deep-recover[metadata]
+```
+
+`pytsk3` (the metadata engine's dependency) needs build tools on some systems:
 
 ```bash
 sudo apt install build-essential python3-dev libtsk-dev
-pip install pytsk3
+pip install deep-recover[metadata]
 ```
 
 If `pytsk3` fails to install, `deep-recover` still works — it just falls back to carving-only mode automatically.
+
+**From source (for development):**
+
+```bash
+git clone https://github.com/Bernard411/deep-recover.git
+cd deep-recover
+pip install -e .[metadata] --break-system-packages   # Kali/Debian externally-managed envs
+```
 
 ## Quick start
 
@@ -80,6 +95,25 @@ deep-recover SOURCE [-o OUTPUT] [--mode {auto,metadata,carve}] [--types TYPE [TY
 | `-v, --verbose` | Debug-level logging of every recovered file as it's found |
 
 Supported carve types: `jpg, png, gif, pdf, zip` (also matches docx/xlsx/pptx/apk/jar, since they're zip containers), `gzip, bmp, mp4, sqlite, wav`. Add more in `deep_recover/signatures.py`.
+
+**More examples:**
+
+```bash
+# Only carve for photos, skip everything else
+deep-recover usb_image.dd -o ./recovered --types jpg png
+
+# Only run the filesystem-metadata engine (fast, real filenames, needs pytsk3)
+deep-recover usb_image.dd -o ./recovered --mode metadata
+
+# Only carve, skip metadata parsing entirely (e.g. filesystem is too damaged to mount)
+deep-recover usb_image.dd -o ./recovered --mode carve
+
+# Whole-disk image with a partition table: recover partition 1 starting at sector 2048
+deep-recover full_disk.dd -o ./recovered --offset $((2048 * 512))
+
+# Verbose logging -- see every file as it's found, not just the summary
+deep-recover usb_image.dd -o ./recovered -v
+```
 
 ## How this works
 
