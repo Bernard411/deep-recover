@@ -5,12 +5,12 @@ long_description = (Path(__file__).parent / "README.md").read_text(encoding="utf
 
 setup(
     name="deep-recover",
-    version="1.0.0",
+    version="1.0.1",
     description="Recover deleted files via filesystem metadata parsing and raw signature carving.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author="Your Name",
-    url="https://github.com/yourname/deep-recover",
+    author="Bernard Hamie",
+    url="https://github.com/Bernard411/deep-recover",
     license="MIT",
     packages=find_packages(),
     python_requires=">=3.9",
