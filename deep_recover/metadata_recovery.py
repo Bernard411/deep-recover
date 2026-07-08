@@ -1,7 +1,7 @@
 """
 Filesystem-metadata-based recovery.
 
-Unlike Ma Tools Ngat carver.py (which ignores the filesystem entirely and just scans raw
+Unlike carver.py (which ignores the filesystem entirely and just scans raw
 bytes for magic numbers), this module walks the actual filesystem structures
 -- the MFT on NTFS, the inode table on ext2/3/4, the FAT/directory entries on
 FAT32/exFAT -- looking for entries still marked "deleted" whose data blocks

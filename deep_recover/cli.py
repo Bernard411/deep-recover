@@ -1,13 +1,13 @@
 """
-Tizigwiritsa Command-line interface for deep-recover.
+Command-line interface for deep-recover.
 
-Typical workflow Yake:
+Typical workflow:
     1. Image the source device first (see README) -- never run this
        tool against a live device you care about.
     2. Run metadata recovery against the image (fast, accurate, gets
        real filenames -- works when the filesystem structures are intact).
     3. Run carving as well (slower, no filenames, but finds content even
-       when the filesystem index itself has been damaged/reformatted).......
+       when the filesystem index itself has been damaged/reformatted).
 """
 
 from __future__ import annotations
